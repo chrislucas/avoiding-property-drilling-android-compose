@@ -1,0 +1,1 @@
+adb shell pkill com.br.avoidingpropertydilling

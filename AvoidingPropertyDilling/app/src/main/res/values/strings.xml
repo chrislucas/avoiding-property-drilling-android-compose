@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AvoidingPropertyDilling</string>
+    <string name="title_activity_pattern_event_solution">PatternEventSolutionActivity</string>
+</resources>

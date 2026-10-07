@@ -1,0 +1,1 @@
+/Users/christoffer/Documents/android-skills-repo/navigation/navigation-3/SKILL.md

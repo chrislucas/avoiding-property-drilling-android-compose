@@ -1,0 +1,1 @@
+/Users/christoffer/Documents/android-skills-repo/system/edge-to-edge/SKILL.md

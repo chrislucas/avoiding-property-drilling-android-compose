@@ -1,0 +1,1 @@
+/Users/christoffer/Documents/android-skills-repo/device-ai/ml-kit-genai-prompt-api/SKILL.md

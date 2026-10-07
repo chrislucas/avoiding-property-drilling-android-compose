@@ -1,0 +1,1 @@
+/Users/christoffer/Documents/android-skills-repo/jetpack-compose/adaptive/SKILL.md
