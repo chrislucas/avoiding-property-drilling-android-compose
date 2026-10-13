@@ -38,6 +38,15 @@ class UserListViewModelTest {
         User(id = "3", name = "Alice Johnson"),
     )
 
+    // Nao precisamos de Robolectric aqui mesmo instanciando SavedStateHandle, que e
+    // uma classe do SDK Android. Isso porque SavedStateHandle (do androidx.lifecycle)
+    // e implementada em Kotlin/JVM puro: o seu estado e apenas um mapa em memória, sem
+    // dependencia do framework Android (nenhuma chamada a metodos nativos "stub" do
+    // android.jar, que e o que exige o Robolectric). Por isso ela roda normalmente na
+    // JVM com um simples SavedStateHandle(). Robolectric so e necessario quando o
+    // codigo sob teste toca APIs Android que, fora do dispositivo/emulador, lancariam
+    // "Method ... not mocked" (ex.: View, Context, renderizacao do Compose) - nao e o
+    // caso desta ViewModel, que so manipula StateFlow, corrotinas e o SavedStateHandle.
     private fun buildViewModel(
         savedStateHandle: SavedStateHandle = SavedStateHandle()
     ) = UserListViewModel(repository, savedStateHandle)
@@ -56,7 +65,10 @@ class UserListViewModelTest {
     fun `estado inicial e Idle`() = runTest {
         val viewModel = buildViewModel()
 
-        assertEquals(UserListUIState.Idle, viewModel.userListUIState.value)
+        assertEquals(
+            UserListUIState.Idle,
+            viewModel.userListUIState.value
+        )
     }
 
     @Test
@@ -145,7 +157,7 @@ class UserListViewModelTest {
     @Test
     fun `getUsers com falha emite Error com a mensagem da excecao`() = runTest {
         coEvery { repository.getUsers() } returns
-            RequestResult.Failure(RuntimeException("Falha de rede"))
+                RequestResult.Failure(RuntimeException("Falha de rede"))
         val viewModel = buildViewModel()
 
         viewModel.getUsers()
